@@ -1,0 +1,22 @@
+{
+  "name": "playwright-automated-tests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abrg-test/playwright-automated-tests.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abrg-test/playwright-automated-tests/issues"
+  },
+  "homepage": "https://github.com/abrg-test/playwright-automated-tests#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.56.0",
+    "@types/node": "^24.7.2"
+  }
+}
