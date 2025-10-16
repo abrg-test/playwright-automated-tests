@@ -1,9 +1,14 @@
 import { test, expect } from '@playwright/test';
-import { generateRandomOrganizationName } from './data_variables';
+import { generateRandomOrganizationName } from '../utils/data_functions';
 
-// Creates a new organization
+const randomOrganizationName = generateRandomOrganizationName();
+
+// This test creates a new organization with a randomized name
 
 test('Create Organization', async ({ page }) => {
+
+    // Log in
+
     await page.goto('https://demo-saas.bugbug.io/sign-in');
     await page.getByRole('textbox', { name: 'Email' }).click();
     await page.getByRole('textbox', { name: 'Email' }).fill('pepubotidosibes@bugbug-inbox.com');
@@ -11,10 +16,14 @@ test('Create Organization', async ({ page }) => {
     await page.getByRole('textbox', { name: 'Password' }).fill('azerty1234');
     await page.getByRole('group').getByRole('button', { name: 'Log in' }).click();
     await expect(page.getByRole('link', { name: 'Demo SaaS' })).toBeVisible();
-    await page.locator('path').first().click();
+
+    // Create a new organization with a random name
+
+    await page.getByTestId('organization-picker').first().click();
     await page.getByRole('menuitem', { name: 'Create organization' }).click();
     await page.getByRole('textbox', { name: 'Name' }).click();
-    await page.getByRole('textbox', { name: 'Name' }).fill(generateRandomOrganizationName());
+    await page.getByRole('textbox', { name: 'Name' }).fill(randomOrganizationName);
     await page.getByRole('button', { name: 'Create' }).click();
     await expect(page.getByRole('button', { name: 'Open dashboard' })).toBeVisible();
+    await expect(page.getByText(randomOrganizationName)).toBeVisible();
 });

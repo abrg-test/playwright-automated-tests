@@ -29,6 +29,8 @@ export default defineConfig({
     // baseURL: 'http://localhost:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
+     viewport: { width: 1920, height: 1080 }, // 👈 Set your desired resolution here
+    // other settings...
     trace: 'on-first-retry',
   },
 

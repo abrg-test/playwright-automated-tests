@@ -1,7 +1,4 @@
-// Data and variables used for the tests
-
-const userEmail = 'pepubotidosibes@bugbug-inbox.com';
-const userPassword = 'azerty1234';
+// Functions used for the tests
 
 export function generateRandomFirstName(): string {
  const timestamp = Date.now();
