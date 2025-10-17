@@ -1,19 +1,20 @@
 import { test, expect } from '@playwright/test';
-import { login } from '../../utils/data_functions';
+import { login, createsampleticket } from '../../utils/data_functions';
 
 test.beforeEach(async ({ page }) => {
     await login(page);
+    await createsampleticket(page);
 });
 
 // This test checks the status change functionality of a ticket
 
 test('Status Change', async ({ page }) => {
-    // Search for a specific ticket by name with the 'New' status
+    // Search for the sample ticket
     await page.getByTestId('ticket-name-search').click();
     await page.getByTestId('ticket-name-search').fill('sample');
 
     // Open ticket details
-    await page.getByText('sample_ticket').click();
+    await page.getByText('sample_ticket').first().click();
     await expect(page.getByRole('button', { name: 'New' })).toBeVisible();
 
     // Change the ticket status through all options and back to 'New'

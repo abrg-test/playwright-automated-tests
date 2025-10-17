@@ -1,8 +1,9 @@
 import { test, expect } from '@playwright/test';
-import { login, generateRandomComment } from '../../utils/data_functions';
+import { login, generateRandomComment, createsampleticket } from '../../utils/data_functions';
 
 test.beforeEach(async ({ page }) => {
     await login(page);
+    await createsampleticket(page);
 });
 
 // This test adds a comment to an existing ticket
@@ -16,7 +17,7 @@ test('Ticket Comment', async ({ page }) => {
     await page.getByTestId('ticket-name-search').fill('sample');
 
     // Open ticket details and add a random comment
-    await page.getByText('sample_ticket').click();
+    await page.getByText('sample_ticket').first().click();
     await page.getByRole('textbox', { name: 'Add a comment...' }).click();
     await page.getByRole('textbox', { name: 'Add a comment...' }).fill(randomComment);
     await page.getByRole('button', { name: 'Send' }).click();
