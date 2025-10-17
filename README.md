@@ -8,7 +8,7 @@ Data variables and Functions used for the tests can be found in the utils folder
 🙌 I am a beginner QA tester passionate about improving products and user experience. 
 ### [Linkedin](https://www.linkedin.com/in/audrey-borrego-08a52095/)
 
-Find here a Portfolio with an example of a project and its test plan, as well as ticket reports:
+You will find below a Portfolio with an example of a project and its test plan, as well as ticket reports:
 
 [Portolio EN](https://github.com/abrg-test/abrgportfolioEN)
 
