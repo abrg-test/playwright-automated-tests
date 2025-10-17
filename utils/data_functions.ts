@@ -13,7 +13,7 @@ export async function login(page: Page) {
   await expect(page.getByRole('link', { name: 'Demo SaaS' })).toBeVisible();
 }
 
-export async function createsampleticket(page: Page) {
+export async function createSampleTicket(page: Page) {
   await page.goto('https://demo-saas.bugbug.io/sign-in');
   await page.getByRole('textbox', { name: 'Email' }).click();
   await page.getByRole('textbox', { name: 'Email' }).fill(userEmail);

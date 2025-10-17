@@ -1,9 +1,9 @@
 import { test, expect } from '@playwright/test';
-import { login, generateRandomComment, createsampleticket } from '../../utils/data_functions';
+import { login, generateRandomComment, createSampleTicket } from '../../utils/data_functions';
 
 test.beforeEach(async ({ page }) => {
     await login(page);
-    await createsampleticket(page);
+    await createSampleTicket(page);
 });
 
 // This test adds a comment to an existing ticket

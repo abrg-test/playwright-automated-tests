@@ -1,9 +1,9 @@
 import { test, expect } from '@playwright/test';
-import { login, createsampleticket } from '../../utils/data_functions';
+import { login, createSampleTicket } from '../../utils/data_functions';
 
 test.beforeEach(async ({ page }) => {
     await login(page);
-    await createsampleticket(page);
+    await createSampleTicket(page);
 });
 
 // This test checks the status change functionality of a ticket
