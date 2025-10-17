@@ -1,9 +1,9 @@
 import { test, expect } from '@playwright/test';
-import { userEmail, userPassword } from '../utils/data_variables';
+import { userEmail, userPassword } from '../../utils/data_variables';
 
-// Test case for successful logout
+// Test case for successful login
 
-test('Logout Flow', async ({ page }) => {
+test('Login', async ({ page }) => {
   await page.goto('https://demo-saas.bugbug.io/sign-in');
   await page.getByRole('textbox', { name: 'Email' }).click();
   await page.getByRole('textbox', { name: 'Email' }).fill(userEmail);
@@ -11,10 +11,4 @@ test('Logout Flow', async ({ page }) => {
   await page.getByRole('textbox', { name: 'Password' }).fill(userPassword);
   await page.getByRole('group').getByRole('button', { name: 'Log in' }).click();
   await expect(page.getByRole('link', { name: 'Demo SaaS' })).toBeVisible();
-
-  // Logout
-
-  await page.getByTestId('user-settings').click();
-  await page.getByRole('menuitem', { name: 'Sign out' }).click();
-  await expect(page.locator('header').getByRole('button', { name: 'Log in' })).toBeVisible();
 });
