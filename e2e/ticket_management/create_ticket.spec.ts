@@ -15,7 +15,6 @@ test('Create Ticket', async ({ page }) => {
 
     // Create a new ticket using the random data
     await page.getByRole('link', { name: 'New' }).click();
-    await page.pause();
     await page.waitForTimeout(5000); // Wait for 5 seconds to ensure the page loads
     await page.getByRole('textbox', { name: 'Your name' }).click();
     await page.getByRole('textbox', { name: 'Your name' }).fill(newFirstName);

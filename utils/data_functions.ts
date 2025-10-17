@@ -3,6 +3,16 @@ import { userEmail, userPassword } from './data_variables';
 
 // Functions used for the tests
 
+export async function login(page: Page) {
+  await page.goto('https://demo-saas.bugbug.io/sign-in');
+  await page.getByRole('textbox', { name: 'Email' }).click();
+  await page.getByRole('textbox', { name: 'Email' }).fill(userEmail);
+  await page.getByRole('textbox', { name: 'Password' }).click();
+  await page.getByRole('textbox', { name: 'Password' }).fill(userPassword);
+  await page.getByRole('group').getByRole('button', { name: 'Log in' }).click();
+  await expect(page.getByRole('link', { name: 'Demo SaaS' })).toBeVisible();
+}
+
 export function generateRandomFirstName(): string {
  const timestamp = Date.now();
  return `firstname_${timestamp}`;
@@ -28,12 +38,7 @@ export function generateRandomTicketDescription(): string {
  return `ticket_description${timestamp}`;
 }
 
-export async function login(page: Page) {
-  await page.goto('https://demo-saas.bugbug.io/sign-in');
-  await page.getByRole('textbox', { name: 'Email' }).click();
-  await page.getByRole('textbox', { name: 'Email' }).fill(userEmail);
-  await page.getByRole('textbox', { name: 'Password' }).click();
-  await page.getByRole('textbox', { name: 'Password' }).fill(userPassword);
-  await page.getByRole('group').getByRole('button', { name: 'Log in' }).click();
-  await expect(page.getByRole('link', { name: 'Demo SaaS' })).toBeVisible();
+export function generateRandomComment(): string {
+ const timestamp = Date.now();
+ return `ticket_comment_${timestamp}`;
 }
