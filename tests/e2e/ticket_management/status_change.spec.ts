@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { login, createSampleTicket } from '../../utils/data_functions';
+import { login, createSampleTicket } from '../../../utils/data_functions';
 
 test.beforeEach(async ({ page }) => {
     await login(page);

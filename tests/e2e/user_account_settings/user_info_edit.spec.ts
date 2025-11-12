@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
-import { generateRandomFirstName } from '../../utils/data_functions';
-import { generateRandomLastName } from '../../utils/data_functions';
-import { login } from '../../utils/data_functions';
+import { generateRandomFirstName } from '../../../utils/data_functions';
+import { generateRandomLastName } from '../../../utils/data_functions';
+import { login } from '../../../utils/data_functions';
 
 test.beforeEach(async ({ page }) => {
     await login(page);

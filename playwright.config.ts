@@ -12,7 +12,7 @@ import { defineConfig, devices } from '@playwright/test';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: './e2e',
+  testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -28,10 +28,9 @@ export default defineConfig({
     /* Base URL to use in actions like `await page.goto('')`. */
     // baseURL: 'http://localhost:3000',
 
+    headless: false,
+    
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    // viewport: { width: 1920, height: 1080 }, // 👈 Set your desired resolution here
-    channel: "chrome",
-    // other settings...
     trace: 'on-first-retry',
   },
 

@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { userEmail, userPassword } from '../../utils/data_variables';
+import { userEmail, userPassword } from '../../../utils/data_variables';
 
 // Test case for successful login
 
