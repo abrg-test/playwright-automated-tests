@@ -1,33 +1,35 @@
 import { test, expect } from '@playwright/test';
+import { LoginPage } from '../../../pages/login_page';
+import { DashboardPage } from '../../../pages/dashboard_page';
+import { userEmail, userPassword } from '../../../utils/data_variables';
 import { generateRandomFirstName } from '../../../utils/data_functions';
 import { generateRandomLastName } from '../../../utils/data_functions';
-import { login } from '../../../utils/data_functions';
-
-test.beforeEach(async ({ page }) => {
-    await login(page);
-});
 
 // Updates user information with randomized data
 
 test('User info edit', async ({ page }) => {
+    const loginPage = new LoginPage(page);
+    const dashboardPage = new DashboardPage(page);
+
     // Generate random data for first name and last name
     const newFirstName = generateRandomFirstName();
     const newLastName = generateRandomLastName();
 
-    //  Edit user information with random first name and last name
+    // Login
+    await loginPage.goto();
+    await loginPage.login(userEmail, userPassword);
 
-    await page.getByTestId('user-settings').click();
-    await page.getByRole('menuitem', { name: 'Manage account' }).click();
-    await page.getByRole('textbox', { name: 'First name' }).click();
-    await page.getByRole('textbox', { name: 'First name' }).fill(newFirstName);
-    await page.getByRole('textbox', { name: 'Last name' }).click();
-    await page.getByRole('textbox', { name: 'Last name' }).fill(newLastName);
-    await page.getByRole('button', { name: 'Save' }).click();
+    //  Edit user information with random first name and last name
+    await dashboardPage.userSettingsButton.click();
+    await dashboardPage.manageAccountLink.click();
+    await dashboardPage.firstnameTextbox.fill(newFirstName);
+    await dashboardPage.lastnameTextbox.fill(newLastName);
+    await dashboardPage.saveButton.click();
 
     // Assert that the new first name and last name are displayed in the user settings and in the input fields
 
-    await expect(page.getByTestId('user-settings')).toContainText(newFirstName);
-    await expect(page.getByTestId('user-settings')).toContainText(newLastName);
-    await expect(page.getByRole('textbox', { name: 'First name' })).toHaveValue(newFirstName);
-    await expect(page.getByRole('textbox', { name: 'Last name' })).toHaveValue(newLastName);
+    await expect(dashboardPage.userSettingsButton).toContainText(newFirstName);
+    await expect(dashboardPage.userSettingsButton).toContainText(newLastName);
+    await expect(dashboardPage.firstnameTextbox).toHaveValue(newFirstName);
+    await expect(dashboardPage.lastnameTextbox).toHaveValue(newLastName);
 });

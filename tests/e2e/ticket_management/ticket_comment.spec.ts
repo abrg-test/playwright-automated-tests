@@ -1,25 +1,31 @@
 import { test, expect } from '@playwright/test';
-import { login, generateRandomComment, createSampleTicket } from '../../../utils/data_functions';
+import { LoginPage } from '../../../pages/login_page';
+import { DashboardPage } from '../../../pages/dashboard_page';
+import { userEmail, userPassword } from '../../../utils/data_variables';
+import { generateRandomFirstName, generateRandomTicketDescription, generateRandomComment } from '../../../utils/data_functions';
 
-test.beforeEach(async ({ page }) => {
-    await login(page);
-    await createSampleTicket(page);
-});
-
-// This test adds a comment to an existing ticket
+// This test adds a comment to a sample ticket
 
 test('Ticket Comment', async ({ page }) => {
+    const loginPage = new LoginPage(page);
+    const dashboardPage = new DashboardPage(page);
+
+    // Login
+    await loginPage.goto();
+    await loginPage.login(userEmail, userPassword);
+
+    // Generate random data for the sample ticket
+    const newFirstName = generateRandomFirstName();
+    const newDescription = generateRandomTicketDescription();
+
+    // Create sample ticket with the random data and title "sample_ticket"
+    await dashboardPage.createTicket(newFirstName, 'sample_ticket', newDescription);
+    await expect(dashboardPage.ticketStatusSelect).toBeVisible();
+
     // Generate random comment
     const randomComment = generateRandomComment();
 
-    // Search for a specific ticket by name
-    await page.getByTestId('ticket-name-search').click();
-    await page.getByTestId('ticket-name-search').fill('sample');
-
-    // Open ticket details and add a random comment
-    await page.getByText('sample_ticket').first().click();
-    await page.getByRole('textbox', { name: 'Add a comment...' }).click();
-    await page.getByRole('textbox', { name: 'Add a comment...' }).fill(randomComment);
-    await page.getByRole('button', { name: 'Send' }).click();
+    // Add a random comment to the sample ticket
+    await dashboardPage.addCommentToTicket(randomComment);
     await expect(page.getByText(randomComment)).toBeVisible();
 });

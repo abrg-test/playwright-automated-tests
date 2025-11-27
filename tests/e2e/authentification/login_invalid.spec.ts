@@ -1,14 +1,13 @@
 import { test, expect } from '@playwright/test';
+import { LoginPage } from '../../../pages/login_page';
 
 // Test case for failed login attempt with wrong credentials
 
 test('Failed Login', async ({ page }) => {
-  await page.goto('https://demo-saas.bugbug.io/sign-in');
-  await page.getByRole('textbox', { name: 'Email' }).click();
-  await page.getByRole('textbox', { name: 'Email' }).fill('invalid_email@bugbug-inbox.com');
-  await page.getByRole('textbox', { name: 'Password' }).click();
-  await page.getByRole('textbox', { name: 'Password' }).fill('wrongpassword');
-  await page.getByRole('group').getByRole('button', { name: 'Log in' }).click();
+  const loginPage = new LoginPage(page);
+
+  await loginPage.goto();
+  await loginPage.login('invalid_email@bugbug-inbox.com', 'wrongpassword');
   await expect(page.getByRole('alert')).toBeVisible();
   await expect(page.getByText('Invalid email or password')).toBeVisible();
 });

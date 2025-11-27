@@ -9,5 +9,5 @@
     "sourceMap": true,
     "outDir": "dist"
   },
-  "include": ["utils", "tests"]
+  "include": ["utils", "pages", "tests"]
 }
